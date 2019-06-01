@@ -1,0 +1,89 @@
+<% include template/header.ejs %>
+<% include template/nav.ejs %>
+<div class="container-fluid">
+
+    
+
+        <div class="row">
+    
+            <div class="col-md-7 text-center" >
+                <h4>List of products</h4>
+                
+                  <% products.forEach(function(product){ %>
+                    <div class="card border-secondary" style="width: 13rem;">
+                    <img class="card-img-top" src="asset/default.jpg" alt="Card image cap">
+                    <div class="card-body">
+                      <p class="card-text">Title : <%= product.product_name %></p>
+                      <p class="card-text">Description : <%= product.descriptin %></p>
+                      <p class="card-text">Price : $<%= product.price %></p>
+                     <button class="add_cart" value="<%= product.product_name %>" >Add To Cart</button>
+                    
+                    </div>
+                  </div>
+                  <% }); %>
+                       
+               
+            </div>
+            <div class="col-md-5">
+                <h4 class="text-center">Carts Info</h4>
+                <table class="table">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% if (cart.length>0) { var i=1; var total=0; %>
+                              <% cart.forEach(function(product){ %>
+                                <tr>
+                                    <th scope="row">
+                                      
+                                       <%= i++ %>
+                                        
+                                         
+                                    </th>
+                                    <td><%= product.product_name%></td>
+                                    <td><%= product.price%></td>
+                                    <td><%= product.qty%></td>
+                                    <td><%= product.total%></td>
+                                    <% total=total+product.total %>
+                                    <td>
+                                      <form action="/cart" method="GET" class="form-cart">
+                                      <input type="hidden" name="product_name" value="<%= product.product_name%>"/>
+                                      <button type="submit" name="action" value="increase" class="increase">+</button>
+                                       <button  type="submit" name="action" value="decrease">-</button> 
+                                       <button  type="submit" name="action" value="remove">X</button>
+                                      </form>
+                                    </td>
+                                </tr>
+                                
+              
+                              <%})%>
+                              <tr>
+                                  <td>Total Amout:<%= total%></td>
+                              </tr>
+              
+                          <% }else{ %>
+              
+                             <tr>
+                               <td>No Record</td>
+                             </tr>
+                          <% } %>
+                         
+                        </tbody>
+                      </table>
+                      
+                      
+            </div>
+
+        </div>
+
+    
+    
+</div>
+<% include template/footer.ejs %>

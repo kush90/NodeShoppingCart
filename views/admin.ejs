@@ -1,0 +1,74 @@
+<% include template/header.ejs %>
+<% include template/nav.ejs %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-5">
+      <br>
+        <div class="jumbotron">
+            <form id="product_form">
+               <div class="form-group">
+                 <label for="name">Product Name</label>
+                 <input type="text" class="form-control" name ="product_name" id="name" aria-describedby="name" required placeholder="Product Name">
+                 
+               </div>
+               <div class="form-group">
+                 <label for="description">Description</label>
+                 <input type="text" class="form-control" name="description" id="description" required placeholder="Description">
+               </div>
+
+               <div class="form-group">
+                       <label for="description">Price</label>
+                       <input type="number" class="form-control" name="price" id="price" required placeholder="Price">
+                     </div>
+
+               
+               <button type="button" id="product_create" class="btn btn-primary">Submit</button>
+           </form>
+        </div>
+    </div>
+    <div class="col-md-7">
+      <br>
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% if (products.length>0) { var i=1; %>
+                <% products.forEach(function(product){ %>
+                  <tr>
+                      <th scope="row">
+                        
+                         <%= i++ %>
+                          
+                           
+                      </th>
+                      <td><%= product.product_name%></td>
+                      <td><%= product.descriptin%></td>
+                      <td><%= product.price%></td>
+                      <td><button>Edit</button> <button class="product_delete" value="<%= product.product_name%>">Delete</button></td>
+                  </tr>
+
+                <%})%>
+                
+
+            <% }else{ %>
+
+               <tr>
+                 <td>No Record</td>
+               </tr>
+            <% } %>
+            </tbody>
+          </table>
+          
+    </div>
+  </div>
+    
+</div>
+<% include template/footer.ejs %>
