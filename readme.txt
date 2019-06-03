@@ -13,3 +13,6 @@ Technologies in this project
     ejs
 database name is "shoppingcart";
 
+To install all dependencies from a package.json file
+-npm install
+
